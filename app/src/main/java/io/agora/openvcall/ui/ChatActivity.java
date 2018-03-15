@@ -47,6 +47,7 @@ import io.agora.propeller.UserStatusData;
 import io.agora.propeller.VideoInfoData;
 import io.agora.propeller.gameengine.CharacterSprite;
 import io.agora.propeller.gameengine.GameView;
+import io.agora.propeller.gameengine.TextureViewClass;
 import io.agora.propeller.preprocessing.VideoPreProcessing;
 import io.agora.propeller.ui.RtlLinearLayoutManager;
 import io.agora.rtc.IRtcEngineEventHandler;
@@ -72,7 +73,8 @@ public class ChatActivity extends BaseActivity implements AGEventHandler {
     private int mDataStreamId;
     private VideoPreProcessing mVideoPreProcessing;
     private SmallVideoViewAdapter mSmallVideoViewAdapter;
-    GameView mGameView = null;
+    //GameView mGameView = null;
+    TextureViewClass mTextureView = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -145,10 +147,11 @@ public class ChatActivity extends BaseActivity implements AGEventHandler {
         FrameLayout.MarginLayoutParams fmp = (FrameLayout.MarginLayoutParams) bottomContainer.getLayoutParams();
         fmp.bottomMargin = virtualKeyHeight() + 16;
 
-        mGameView = ((GameView) findViewById(R.id.gameView));
-        mGameView.setZOrderOnTop(true);    // necessary
+        mTextureView = ((TextureViewClass) findViewById(R.id.gameView));
+        /*mGameView.setZOrderOnTop(true);    // necessary
         SurfaceHolder sfhTrackHolder = mGameView.getHolder();
-        sfhTrackHolder.setFormat(PixelFormat.TRANSPARENT);
+        sfhTrackHolder.setFormat(PixelFormat.TRANSPARENT);*/
+
 
         initMessageList();
     }
@@ -626,7 +629,7 @@ public class ChatActivity extends BaseActivity implements AGEventHandler {
                 //Based on message type just play the animation.
                 //Play the sprite animation
                 CharacterSprite sprite = new CharacterSprite(BitmapFactory.decodeResource(getResources(),R.drawable.two));
-                mGameView.addSprite(sprite);
+                mTextureView.addSprite(sprite);
                 //notifyMessageChanged(new Message(new User(peerUid, String.valueOf(peerUid)), new String(content)));
                 break;
             case AGEventHandler.EVENT_TYPE_ON_AGORA_MEDIA_ERROR: {

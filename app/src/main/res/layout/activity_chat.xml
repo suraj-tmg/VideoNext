@@ -180,11 +180,21 @@
             android:layout_above="@id/bottom_container" />
 
     </RelativeLayout>
-    <io.agora.propeller.gameengine.GameView
+
+    <io.agora.propeller.gameengine.TextureViewClass
+        android:id="@+id/gameView"
+        android:layout_height="match_parent"
+        android:background="#99000000"
+        android:layout_alignParentTop="true"
+        android:layout_width="match_parent">
+    </io.agora.propeller.gameengine.TextureViewClass>
+
+   <!-- <io.agora.propeller.gameengine.GameView
         android:id="@+id/gameView"
         android:layout_height="430dp"
         android:background="#99000000"
         android:layout_alignParentTop="true"
         android:layout_width="match_parent">
-    </io.agora.propeller.gameengine.GameView>
+    </io.agora.propeller.gameengine.GameView>-->
+
 </RelativeLayout>
