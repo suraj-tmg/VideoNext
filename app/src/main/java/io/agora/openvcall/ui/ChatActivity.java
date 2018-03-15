@@ -627,8 +627,24 @@ public class ChatActivity extends BaseActivity implements AGEventHandler {
                 peerUid = (Integer) data[0];
                 final byte[] content = (byte[]) data[1];
                 //Based on message type just play the animation.
+                String mtype = new String(content);
+
+                CharacterSprite sprite = null;
+                if(mtype.equals("a"))
+                {
+                   sprite = new CharacterSprite(BitmapFactory.decodeResource(getResources(),R.drawable.one));
+
+                }
+                else if(mtype.equals("b"))
+                {
+                    sprite = new CharacterSprite(BitmapFactory.decodeResource(getResources(),R.drawable.three));
+
+                }
+                else
+                {
+                    sprite = new CharacterSprite(BitmapFactory.decodeResource(getResources(),R.drawable.two));
+                }
                 //Play the sprite animation
-                CharacterSprite sprite = new CharacterSprite(BitmapFactory.decodeResource(getResources(),R.drawable.two));
                 mTextureView.addSprite(sprite);
                 //notifyMessageChanged(new Message(new User(peerUid, String.valueOf(peerUid)), new String(content)));
                 break;

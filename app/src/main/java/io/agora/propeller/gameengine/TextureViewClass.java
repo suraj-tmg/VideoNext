@@ -18,7 +18,9 @@ import android.graphics.Typeface;
 import android.graphics.drawable.BitmapDrawable;
 import android.util.AttributeSet;
 import android.util.Log;
+import android.view.MotionEvent;
 import android.view.TextureView;
+import android.view.View;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -100,6 +102,7 @@ public class TextureViewClass extends TextureView implements TextureView.Surface
         CharacterSprite sprite = new CharacterSprite(BitmapFactory.decodeResource(getResources(),R.drawable.two));
         addSprite(sprite);
         setFocusable(true);
+        this.setOnTouchListener(captureBtnOnTouchListener);
     }
 
     public void setBallPosition(Vector2 pos) {
@@ -203,6 +206,9 @@ public class TextureViewClass extends TextureView implements TextureView.Surface
         {
             m_listOfActiveSprites.get(i).update();
         }
+
+
+
     }
 
     //Render the frame.
@@ -290,5 +296,39 @@ public class TextureViewClass extends TextureView implements TextureView.Surface
         }
         return res;
     }
+
+
+    public View.OnTouchListener captureBtnOnTouchListener = new View.OnTouchListener() {
+
+        long touchUpMs = 0;
+        boolean isTouchDown = false;
+        private float initialTouchX;
+        private float initialTouchY;
+
+        @Override
+        public boolean onTouch(View v, MotionEvent event) {
+            switch (event.getAction()) {
+                case MotionEvent.ACTION_DOWN:
+                    isTouchDown = true;
+                    initialTouchX = event.getRawX();
+                    initialTouchY = event.getRawY();
+
+                    return true;
+                case MotionEvent.ACTION_CANCEL:
+                case MotionEvent.ACTION_UP:
+                    isTouchDown = false;
+                    touchUpMs = event.getEventTime();
+
+                    //int xdiff = Math.abs((int) (event.getRawX() - initialTouchX));
+                    //int ydiff = Math.abs((int) (event.getRawY() - initialTouchY));
+                    return true;
+                case MotionEvent.ACTION_MOVE:
+                    break;
+            }
+
+            return false;
+        }
+    };
+
 }
 
